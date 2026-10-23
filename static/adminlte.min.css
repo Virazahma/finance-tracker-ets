@@ -1,0 +1,25 @@
+/* Efek Transisi Pergeseran / Fade-In Halus saat Halaman Dimuat */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    animation: fadeInSlide 0.5s ease-in-out;
+}
+
+@keyframes fadeInSlide {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mempercantik Card */
+.card, .bg-white {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover, .bg-white:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1) !important;
+}

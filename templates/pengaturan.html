@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Pengaturan Sistem{% endblock %}
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-8 bg-white p-4 rounded-3 shadow-sm">
+            <h2 class="mb-3">⚙️ Pengaturan Aplikasi</h2>
+            <p class="text-muted">Sesuaikan preferensi akun dan tampilan sistem keuangan pribadimu.</p>
+            <hr>
+            
+            <form onsubmit="alert('Pengaturan berhasil disimpan!'); return false;">
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Mata Uang Default:</label>
+                    <select class="form-select">
+                        <option value="IDR" selected>Rupiah (IDR - Rp)</option>
+                        <option value="USD">US Dollar (USD - $)</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Target Batas Pengeluaran Bulanan (Rp):</label>
+                    <input type="number" class="form-control" value="2000000">
+                </div>
+
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="notif" checked>
+                    <label class="form-check-label" for="notif">Aktifkan Notifikasi Anggaran</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

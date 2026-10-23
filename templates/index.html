@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard Keuangan{% endblock %}
+{% block content %}
+    <div class="p-4 mb-4 bg-white rounded-3 shadow-sm border-start border-primary border-4">
+        <h1>Selamat Datang, Shavira! 👋</h1>
+        <p class="text-muted mb-0">Sistem Informasi Pencatatan Keuangan Pribadi (Periode Maret - Juli 2026).</p>
+    </div>
+    
+    <!-- Kartu Statistik -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <div class="p-4 bg-white rounded-3 shadow-sm border-start border-success border-4">
+                <h6 class="text-muted">Total Pemasukan (5 Bulan)</h6>
+                <h3 class="text-success fw-bold">Rp {{ "{:,}".format(masuk) }}</h3>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-4 bg-white rounded-3 shadow-sm border-start border-danger border-4">
+                <h6 class="text-muted">Total Pengeluaran (5 Bulan)</h6>
+                <h3 class="text-danger fw-bold">Rp {{ "{:,}".format(keluar) }}</h3>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-4 bg-white rounded-3 shadow-sm border-start border-primary border-4">
+                <h6 class="text-muted">Akumulasi Saldo Bersih</h6>
+                <h3 class="text-primary fw-bold">Rp {{ "{:,}".format(saldo) }}</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bagian Tambahan Agar Dashboard Penuh (Tabel 5 Transaksi Terakhir) -->
+    <div class="p-4 bg-white rounded-3 shadow-sm">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="mb-0">Aktivitas Transaksi Terbaru</h4>
+            <a href="{{ url_for('transaksi') }}" class="btn btn-outline-primary btn-sm">Lihat Semua Data</a>
+        </div>
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Tanggal</th>
+                    <th>Keterangan</th>
+                    <th>Jenis</th>
+                    <th>Jumlah</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for t in data[:5] %}
+                <tr>
+                    <td>{{ t.tanggal }}</td>
+                    <td>{{ t.keterangan }}</td>
+                    <td>
+                        {% if t.jenis == 'masuk' %}
+                            <span class="badge bg-success">Pemasukan</span>
+                        {% else %}
+                            <span class="badge bg-danger">Pengeluaran</span>
+                        {% endif %}
+                    </td>
+                    <td class="fw-bold {% if t.jenis == 'masuk' %}text-success{% else %}text-danger{% endif %}">
+                        {% if t.jenis == 'masuk' %}+{% else %}-{% endif %} Rp {{ "{:,}".format(t.jumlah) }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
